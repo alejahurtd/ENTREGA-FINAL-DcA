@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.2.5",
+		"@types/firebase": "^3.2.1",
 		"firebase": "^10.12.2",
 		"redux": "^5.0.1"
 	}
