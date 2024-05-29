@@ -1,0 +1,142 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 27rem;
+	height: 36rem;
+	border-radius: 1.6rem;
+	background: #2f60e9;
+	margin-bottom: 20px;
+}
+
+.imgContainer {
+	width: 90%;
+	height: 85%;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	padding-block: 1.5rem;
+}
+
+.img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 1.2rem;
+}
+
+.userContent {
+	width: 100%;
+	height: 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-bottom: 1.5rem;
+}
+
+.iconContainer {
+	height: 25%;
+	display: flex;
+	justify-content: flex-start;
+	padding-top: 1rem;
+	padding-left: 0.5rem;
+}
+
+.icon {
+	width: 100%;
+	height: 100%;
+	padding-left: 1rem;
+	margin-top: -1.5rem;
+}
+
+.likeContainer {
+	padding-left: 1.7rem;
+	margin-top: -2rem;
+}
+
+.likes {
+	color: #cbf900;
+	font-size: 1.2rem;
+	font-style: normal;
+	font-weight: 600;
+}
+
+.likes,
+.username,
+.description {
+	text-align: left;
+}
+
+.username-container {
+	padding-left: 1.5rem;
+	margin-top: -2rem;
+}
+
+.username {
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.description {
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: 400;
+	padding-right: 1rem;
+}
+.dislike {
+	background-image: URL('../../assets/emptyHeart.png');
+	background-size: cover;
+}
+.like {
+	background-image: URL('../../assets/heart.png');
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 20rem;
+		height: 27rem;
+	}
+
+	.imgContainer {
+		height: 65%;
+		padding: 1rem 0;
+		width: 85%;
+		display: flex;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	.iconContainer {
+		height: 25%;
+		display: flex;
+		justify-content: flex-start;
+		padding-top: 0.3rem;
+		padding-left: 0.2rem;
+	}
+
+	.likeContainer {
+		padding-left: 1rem;
+		margin-top: -0.3rem;
+		margin-bottom: 0.2rem;
+	}
+	.userContent {
+		width: 100%;
+		height: 20%;
+	}
+	.userContent,
+	.likeContainer,
+	.username-container {
+		padding-left: 1rem;
+	}
+
+	.icon {
+		margin-top: 0;
+	}
+
+	.likes,
+	.username,
+	.description {
+		font-size: 1rem;
+	}
+}
