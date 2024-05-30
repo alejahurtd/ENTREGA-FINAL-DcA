@@ -1,7 +1,7 @@
-import { collection, query, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase/firebaseConfig';
-import { store } from '../store/store';
-import { setPosts, setTwets } from '../store/postsSlice';
+const { collection, query, onSnapshot } = require('firebase/firestore');
+const { db } = require('../firebase/firebaseConfig');
+const { store } = require('../store/store');
+const { setPosts, setTwets } = require('../store/postsSlice');
 import { Post, Twet } from '../store/postsSlice';
 
 function getPosts() {

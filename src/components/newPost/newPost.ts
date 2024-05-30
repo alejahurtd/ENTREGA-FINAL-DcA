@@ -1,53 +1,51 @@
-// importamos css e iconos
-
 import postStyles from './postImage.css';
 import likedIconPath from '../../assets/heart.png';
 import unlikedIconPath from '../../assets/emptyHeart.png';
 import savedIconPath from '../../assets/save.png';
 import unsavedIconPath from '../../assets/emptySave.png';
 
-// Empieza nuestro "diccionario" para los nombres de los atributos HTML que el componente puede recibir.
-// Recomendación de Anne, es mejor manejarlos sin mayusculas, (apesar que en la data esten con mayusculas) porque aveces ts no las lee y marca error
-
-const ForData: omit<postImage, 'id'> = {
-	id = '',
-	image = '',
-	isLiked = '',
-	isSaved = '',
-	likescount = '',
-	username = '',
-	description = '',
+interface Post {
+	id: string;
+	image: string;
+	isLiked: boolean;
+	isSaved: boolean;
+	likescount: string;
+	username: string;
+	description: string;
+}
+const FormData: Omit<Post, 'id'> = {
+	image: '',
+	isLiked: false,
+	isSaved: false,
+	likescount: '',
+	username: '',
+	description: '',
 };
 
-class PostImageNew extends HTMLElement {
+class PostImage extends HTMLElement {
+	id: string;
+	image?: string;
+	isLiked?: boolean;
+	isSaved?: boolean;
+	likescount?: string;
+	username?: string;
+	description?: string;
+
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
 	}
 
-	// observedAttributes retorna una lista de atributos que cuando alguno cambia desencadena o se llama a "attributeChangedCallback"
-
 	static get observedAttributes() {
-		const attrs: Record<Attribute, null> = {
-			id: null,
-			image: null,
-			isLiked: null,
-			isSaved: null,
-			likescount: null,
-			username: null,
-			description: null,
-		};
-		return Object.keys(attrs);
+		return Object.keys(FormData);
 	}
 
-	//attributeChangedCallback se ejecuta cuando cambia algún atributo observado (arriba)
-
-	attributeChangedCallback(propName: Attribute, oldValue: string | undefined, newValue: string | undefined) {
+	attributeChangedCallback(propName: keyof FormData, oldValue: string | undefined, newValue: string | undefined) {
 		switch (propName) {
-			case Attribute.isLiked:
+			case 'isLiked':
 				this.isLiked = newValue === 'true';
 				break;
-			case Attribute.isSaved:
+			case 'isSaved':
 				this.isSaved = newValue === 'true';
 				break;
 			default:
@@ -60,7 +58,34 @@ class PostImageNew extends HTMLElement {
 		this.render();
 	}
 
-	// Evento para nuestros Likes y Saves
+	async render() {
+		const css = this.ownerDocument.createElement('style');
+		css.innerHTML = postStyles;
+		this.shadowRoot?.appendChild(css);
+
+		const postContainer = this.ownerDocument.createElement('section');
+		const image = this.ownerDocument.createElement('img');
+		image.src = this.image;
+		postContainer.appendChild(image);
+
+		const likeContainer = this.ownerDocument.createElement('div');
+		likeContainer.innerHTML = `
+      <img src="${this.isLiked ? likedIconPath : unlikedIconPath}" alt="Like icon" id="likeBtn">
+      <p>${this.likescount} likes</p>
+    `;
+		postContainer.appendChild(likeContainer);
+
+		const usernameContainer = this.ownerDocument.createElement('div');
+		usernameContainer.innerHTML = `
+      <p>
+        <span>${this.username}</span>: <span>${this.description}</span>
+      </p>
+    `;
+		postContainer.appendChild(usernameContainer);
+
+		this.shadowRoot?.appendChild(postContainer);
+	}
+
 	changeLikeState() {
 		this.isLiked = !this.isLiked;
 		this.render();
@@ -69,49 +94,6 @@ class PostImageNew extends HTMLElement {
 	changeSaveState() {
 		this.isSaved = !this.isSaved;
 		this.render();
-	}
-
-	render() {
-		if (this.shadowRoot) {
-			// Limpiar el contenido existente en el shadowRoot, para que no se duplique el contenido
-			this.shadowRoot.innerHTML = '';
-
-			//esctrcutura de nuestro componente
-
-			this.shadowRoot.innerHTML += `
-						 <style> ${postStyles}</style>
-
-             <section class="container">
-						 <div class="imgContainer">
-						   <img class= "img" src="${this.image}" alt="Post image">
-						 </div>
-						 <div class="userContent">
-						   <div class="iconContainer">
-							    <img class= "icon" src="${this.isLiked ? likedIconPath : unlikedIconPath}" alt="Like icon" id="likeBtn">
-							   <img class= "icon" src="${this.isSaved ? savedIconPath : unsavedIconPath}" alt="Save icon" id="saveBtn">
-							 </div>
-							 <div class= "likeContainer">
-							 <p class= "likes">${this.likescount} likes</p>
-							 </div>
-							 <div class= "username-container">
-							 <p
-							   <span class= "username" >${this.username} </span>: <span class= "description"> ${this.description}</span>
-							 </p>
-							 </div>
-
-
-
-						 </div>
-            </section>
-        `;
-			// buscamos nuestros botones en el DOM
-			const likeBtn = this.shadowRoot.querySelector('#likeBtn');
-			const saveBtn = this.shadowRoot.querySelector('#saveBtn');
-
-			// y aquí añadimos el evento para el click
-			likeBtn?.addEventListener('click', () => this.changeLikeState());
-			saveBtn?.addEventListener('click', () => this.changeSaveState());
-		}
 	}
 }
 
