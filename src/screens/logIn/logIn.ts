@@ -1,4 +1,4 @@
-import { addUser } from '../../services/firebaseConfig';
+import { addUser } from '../../firebase/firebaseConfig';
 import { LogIn } from '../../types/logIn';
 
 const FormData: Omit<LogIn, 'id'> = {
@@ -6,7 +6,7 @@ const FormData: Omit<LogIn, 'id'> = {
 	password: '',
 };
 
-class Login extends HTMLElement {
+class LoginScreen extends HTMLElement {
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
@@ -73,5 +73,5 @@ class Login extends HTMLElement {
 	}
 }
 
-customElements.define('app-login', Login);
-export default Login;
+customElements.define('login-screen', LoginScreen);
+export default LoginScreen;

@@ -1,6 +1,6 @@
 import { appState } from '../../store/index';
 import creatPostStyle from './creatPost.css';
-import { Screens } from '../../types/store';
+import { Screens } from '../../types/storeScreens';
 
 class CreatePostButton extends HTMLElement {
 	constructor() {
