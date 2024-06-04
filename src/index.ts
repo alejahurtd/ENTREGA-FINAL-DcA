@@ -1,5 +1,5 @@
 import './screens/mainFeed/mainFeed';
-import indexStyle from './index.css';
+// import indexStyle from '';
 
 import './screens/profile/profile';
 import './screens/search/search';
