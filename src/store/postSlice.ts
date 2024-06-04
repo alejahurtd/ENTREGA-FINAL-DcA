@@ -1,4 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction } from '../../node_modules/@reduxjs/toolkit/dist/createAction';
+import { createSlice } from '../../node_modules/@reduxjs/toolkit/dist/createSlice';
 
 export interface Post {
 	usuario: string;

@@ -2,6 +2,7 @@
 const { initializeApp } = require('firebase/app');
 const { getFirestore } = require('firebase/firestore');
 const { getStorage } = require('firebase/storage');
+const { getAuth } = require('firebase/auth');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,5 +23,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+export const auth = getAuth(app);
 
 // KEY DE GERALDINE _________________________________

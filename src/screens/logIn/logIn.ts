@@ -1,5 +1,4 @@
-import { addUser } from '../../firebase/firebaseConfig';
-import { LogIn } from '../../types/logIn';
+import { auth } from '../../firebase/firebaseConfig';
 
 const FormData: Omit<LogIn, 'id'> = {
 	email: '',
